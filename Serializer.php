@@ -8,5 +8,5 @@ interface Serializer
 {
     public function toString(RdKafkaMessage $message): string;
 
-    public function toMessage(string $string): RdKafkaMessage;
+    public function toMessage(string $string, $config): RdKafkaMessage;
 }

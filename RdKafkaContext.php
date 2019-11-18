@@ -220,4 +220,8 @@ class RdKafkaContext implements Context
 
         return $this->conf;
     }
+
+    public function getConfig(){
+        return $this->config;
+    }
 }
