@@ -59,7 +59,8 @@ class RdKafkaContext implements Context
         $this->kafkaConsumers = [];
         $this->rdKafkaConsumers = [];
 
-        $this->setSerializer(new JsonSerializer());
+        $serializer = (array_key_exists('serializer', $config) ? $config['serializer'] : JsonSerializer::class);
+        $this->setSerializer(new $serializer());
     }
 
     /**
@@ -219,9 +220,5 @@ class RdKafkaContext implements Context
         }
 
         return $this->conf;
-    }
-
-    public function getConfig(){
-        return $this->config;
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
+namespace Polaris\Inspector\Domain\InspectorIntegrations\Serializers;
 
-namespace Enqueue\RdKafka;
+use Enqueue\RdKafka\RdKafkaMessage;
+use Enqueue\RdKafka\Serializer;
 
 class JsonSerializer implements Serializer
 {
@@ -16,11 +17,7 @@ class JsonSerializer implements Serializer
                 'headers' => $message->getHeaders(),
             ]);
         } else {
-            $json = json_encode([
-                'body' => $message->getBody(),
-                'properties' => $message->getProperties(),
-                'headers' => $message->getHeaders(),
-            ]);
+            $json = $message->getBody();
         }
 
         if (JSON_ERROR_NONE !== json_last_error()) {
@@ -34,7 +31,7 @@ class JsonSerializer implements Serializer
         return $json;
     }
 
-    public function toMessage(string $string, $config): RdKafkaMessage
+    public function toMessage(string $string, $config = []): RdKafkaMessage
     {
         $procesor = (array_key_exists('processor', $config) ? $config['processor'] : 'ProcessKafkaMessage') . "@handle";
         $body = [
