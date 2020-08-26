@@ -1,6 +1,6 @@
 <?php
 
-namespace Polaris\Inspector\Domain\InspectorIntegrations\Serializers;
+namespace Enqueue\RdKafka;
 
 use Enqueue\RdKafka\RdKafkaMessage;
 use Enqueue\RdKafka\Serializer;
